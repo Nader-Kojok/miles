@@ -37,11 +37,36 @@ dependencies:
   sqflite: ^2.3.0
   path: ^1.8.3
   speech_to_text: ^7.3.0
+  
+  # Push Notifications (with Supabase)
+  onesignal_flutter: ^5.2.9
+  flutter_local_notifications: ^18.0.1
+  
+  # Biometric Authentication
+  local_auth: ^2.3.0
+  
+  # Deep Linking
+  app_links: ^6.3.2
+  
+  # Error Handling & Monitoring  
+  connectivity_plus: ^6.1.2
+  
+  # Performance & Cache
+  dio: ^5.8.0
+  dio_cache_interceptor: ^3.5.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  
+  # Testing
+  mockito: ^5.4.4
+  build_runner: ^2.4.13
+  integration_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
 
 flutter:
   uses-material-design: true

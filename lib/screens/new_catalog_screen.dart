@@ -442,6 +442,7 @@ class _NewCatalogScreenState extends State<NewCatalogScreen> {
                                 width: 80,
                                 margin: const EdgeInsets.only(right: 12),
                                 child: Column(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Container(
                                       width: 70,
@@ -456,16 +457,18 @@ class _NewCatalogScreenState extends State<NewCatalogScreen> {
                                         size: 32,
                                       ),
                                     ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      category.name,
-                                      style: const TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
+                                    const SizedBox(height: 6),
+                                    Flexible(
+                                      child: Text(
+                                        category.name,
+                                        style: const TextStyle(
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      textAlign: TextAlign.center,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
                                 ),

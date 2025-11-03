@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/supabase_service.dart';
+import '../services/biometric_auth_service.dart';
+import '../utils/app_colors.dart';
 import 'welcome_screen.dart';
 import 'faq_screen.dart';
 import 'about_us_screen.dart';
@@ -13,11 +15,15 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   final _supabaseService = SupabaseService();
+  final _biometricService = BiometricAuthService();
   bool _pushNotifications = true;
   bool _orderNotifications = true;
   bool _promoNotifications = false;
   bool _newsNotifications = true;
   bool _darkMode = false;
+  bool _biometricEnabled = false;
+  bool _biometricAvailable = false;
+  String _biometricType = '';
   String _language = 'Français';
   String _currency = 'FCFA';
 
@@ -25,6 +31,55 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void initState() {
     super.initState();
     _checkAuth();
+    _checkBiometric();
+  }
+
+  Future<void> _checkBiometric() async {
+    final canAuth = await _biometricService.canCheckBiometrics();
+    final isEnabled = await _biometricService.isBiometricEnabled();
+    
+    if (canAuth) {
+      final biometrics = await _biometricService.getAvailableBiometrics();
+      final typeName = _biometricService.getBiometricTypeName(biometrics);
+      
+      setState(() {
+        _biometricAvailable = true;
+        _biometricEnabled = isEnabled;
+        _biometricType = typeName;
+      });
+    }
+  }
+
+  Future<void> _toggleBiometric(bool value) async {
+    if (value) {
+      // Enabling - require authentication first
+      final success = await _biometricService.toggleBiometric();
+      
+      if (success) {
+        setState(() => _biometricEnabled = true);
+        
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('$_biometricType activé avec succès'),
+              backgroundColor: AppColors.success,
+            ),
+          );
+        }
+      }
+    } else {
+      // Disabling
+      await _biometricService.disableBiometric();
+      setState(() => _biometricEnabled = false);
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('$_biometricType désactivé'),
+          ),
+        );
+      }
+    }
   }
 
   Future<void> _checkAuth() async {
@@ -153,6 +208,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
             ],
           ),
+          if (_biometricAvailable)
+            _buildSection(
+              title: 'SÉCURITÉ',
+              children: [
+                _buildSwitchTile(
+                  icon: _biometricType.contains('Face') ? Icons.face : Icons.fingerprint,
+                  title: 'Connexion avec $_biometricType',
+                  subtitle: _biometricEnabled 
+                    ? 'Activé - Connexion rapide disponible'
+                    : 'Activer pour une connexion rapide et sécurisée',
+                  value: _biometricEnabled,
+                  onChanged: _toggleBiometric,
+                ),
+              ],
+            ),
           _buildSection(
             title: 'AIDE & SUPPORT',
             children: [

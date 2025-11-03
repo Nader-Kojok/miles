@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import '../services/supabase_service.dart';
+import '../services/biometric_auth_service.dart';
 import '../utils/app_colors.dart';
 import 'otp_verification_screen.dart';
 import 'home_screen.dart';
@@ -15,8 +16,96 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _supabaseService = SupabaseService();
+  final _biometricService = BiometricAuthService();
   PhoneNumber _phoneNumber = PhoneNumber(isoCode: 'SN'); // Sénégal par défaut
   bool _isLoading = false;
+  bool _biometricAvailable = false;
+  bool _biometricEnabled = false;
+  String _biometricType = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _checkBiometricAvailability();
+  }
+
+  Future<void> _checkBiometricAvailability() async {
+    final canAuth = await _biometricService.canCheckBiometrics();
+    final isEnabled = await _biometricService.isBiometricEnabled();
+    
+    if (canAuth) {
+      final biometrics = await _biometricService.getAvailableBiometrics();
+      final typeName = _biometricService.getBiometricTypeName(biometrics);
+      
+      setState(() {
+        _biometricAvailable = true;
+        _biometricEnabled = isEnabled;
+        _biometricType = typeName;
+      });
+    }
+  }
+
+  Future<void> _loginWithBiometric() async {
+    if (!_biometricEnabled) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Activez l\'authentification biométrique dans les paramètres'),
+          backgroundColor: AppColors.warning,
+        ),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      final authenticated = await _biometricService.authenticateForLogin();
+      
+      if (!authenticated) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Authentification annulée'),
+              backgroundColor: AppColors.error,
+            ),
+          );
+        }
+        return;
+      }
+
+      // Check if user session exists
+      final user = _supabaseService.currentUser;
+      if (user != null && mounted) {
+        // User already logged in, navigate to home
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Session expirée. Veuillez vous reconnecter avec votre téléphone.'),
+              backgroundColor: AppColors.warning,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erreur: $e'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
+  }
 
   Future<void> _signInWithPhone() async {
     if (!_formKey.currentState!.validate()) return;
@@ -248,6 +337,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                 ),
+                
+                // Connexion biométrique (si disponible et activée)
+                if (_biometricAvailable && _biometricEnabled) ...[
+                  const SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: _isLoading ? null : _loginWithBiometric,
+                    icon: Icon(
+                      _biometricType.contains('Face') ? Icons.face : Icons.fingerprint,
+                      size: 24,
+                    ),
+                    label: Text('Connexion avec $_biometricType'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
+                  ),
+                ],
                 
                 const SizedBox(height: 32),
                 

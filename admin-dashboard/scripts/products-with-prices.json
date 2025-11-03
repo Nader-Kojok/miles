@@ -1,0 +1,12 @@
+{
+  "note": "Dummy prices applied - UPDATE THESE VIA ADMIN DASHBOARD",
+  "priceRanges": {
+    "filters": "8000-18000 FCFA",
+    "brakes": "8000-85000 FCFA",
+    "suspension": "15000-150000 FCFA",
+    "cooling": "22000-180000 FCFA",
+    "ignition": "6000-35000 FCFA",
+    "belts": "12000-25000 FCFA",
+    "engine": "450000 FCFA (injection pump)"
+  }
+}

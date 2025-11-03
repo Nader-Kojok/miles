@@ -34,6 +34,8 @@
 	<string>Nous avons besoin d'accéder à vos photos pour votre avatar</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Nous avons besoin d'accéder à la reconnaissance vocale pour la recherche vocale</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Bolide utilise Face ID pour une connexion rapide et sécurisée, ainsi que pour confirmer vos paiements</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

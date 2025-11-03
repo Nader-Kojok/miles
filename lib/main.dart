@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:provider/provider.dart';
@@ -6,18 +7,49 @@ import 'screens/welcome_screen.dart';
 import 'screens/home_screen.dart';
 import 'services/supabase_service.dart';
 import 'services/cart_service.dart';
+import 'services/push_notification_service.dart';
+import 'services/connectivity_service.dart';
+import 'services/analytics_service.dart';
+import 'providers/profile_provider.dart';
+import 'providers/favorite_provider.dart';
+import 'providers/vehicle_provider.dart';
 import 'utils/app_colors.dart';
+import 'utils/error_handler.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  // Initialiser Supabase
-  await Supabase.initialize(
-    url: 'https://uerwlrpatvumjdksfgbj.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlcndscnBhdHZ1bWpka3NmZ2JqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4MzczNTEsImV4cCI6MjA3NzQxMzM1MX0.Q_TykGHuIEMyhOvf2OfmDh7PQbk54cZehNJKnc4CWYg',
+  // Run app with zone error handling
+  await runZonedGuarded<Future<void>>(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      
+      // Initialize global error handling (2025 best practice)
+      GlobalErrorHandler.initialize();
+      
+      // Set custom error widget
+      ErrorWidget.builder = (FlutterErrorDetails details) {
+        return CustomErrorWidget(errorDetails: details);
+      };
+      
+      // Initialize Supabase
+      await Supabase.initialize(
+        url: 'https://uerwlrpatvumjdksfgbj.supabase.co',
+        anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVlcndscnBhdHZ1bWpka3NmZ2JqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4MzczNTEsImV4cCI6MjA3NzQxMzM1MX0.Q_TykGHuIEMyhOvf2OfmDh7PQbk54cZehNJKnc4CWYg',
+      );
+      
+      // Initialize Analytics (2025 best practice - using Supabase)
+      Analytics.initialize(enableSupabaseTracking: true);
+      
+      // Initialize Push Notifications (OneSignal)
+      await PushNotificationService().initialize('924c65ff-2ef3-4dfb-ab0c-a101adda03f8');
+      
+      runApp(const MyApp());
+    },
+    (error, stack) {
+      // Catch any errors during app initialization
+      debugPrint('App initialization error: $error');
+      debugPrint('Stack trace: $stack');
+    },
   );
-  
-  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -27,7 +59,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // Services
         ChangeNotifierProvider(create: (_) => CartService()),
+        ChangeNotifierProvider(create: (_) => ConnectivityService()),
+        
+        // State Management Providers (2025 best practice)
+        ChangeNotifierProvider(create: (_) => ProfileProvider()),
+        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
+        ChangeNotifierProvider(create: (_) => VehicleProvider()),
       ],
       child: MaterialApp(
         title: 'Bolide - Pièces détachées',

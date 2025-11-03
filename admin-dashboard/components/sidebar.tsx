@@ -13,13 +13,17 @@ import {
   Bell,
   Settings,
   LogOut,
-  Zap
+  Zap,
+  BarChart3,
+  Activity
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabase/client'
 
 const navigation = [
   { name: 'Tableau de bord', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Analytics', href: '/dashboard/analytics', icon: BarChart3 },
+  { name: 'État Système', href: '/dashboard/system-health', icon: Activity },
   { name: 'Produits', href: '/dashboard/products', icon: Package },
   { name: 'Catégories', href: '/dashboard/categories', icon: FolderTree },
   { name: 'Commandes', href: '/dashboard/orders', icon: ShoppingCart },

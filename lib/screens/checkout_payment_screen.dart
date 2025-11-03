@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
+import '../services/biometric_auth_service.dart';
 import 'checkout_confirmation_screen.dart';
 
 class CheckoutPaymentScreen extends StatefulWidget {
@@ -10,7 +11,65 @@ class CheckoutPaymentScreen extends StatefulWidget {
 }
 
 class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
+  final _biometricService = BiometricAuthService();
   String? _selectedPaymentMethod;
+  bool _biometricAvailable = false;
+  String _biometricType = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _checkBiometricAvailability();
+  }
+
+  Future<void> _checkBiometricAvailability() async {
+    final canAuth = await _biometricService.canCheckBiometrics();
+    if (canAuth) {
+      final biometrics = await _biometricService.getAvailableBiometrics();
+      final typeName = _biometricService.getBiometricTypeName(biometrics);
+      setState(() {
+        _biometricAvailable = true;
+        _biometricType = typeName;
+      });
+    }
+  }
+
+  Future<void> _confirmPayment() async {
+    if (_selectedPaymentMethod == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Veuillez sélectionner un mode de paiement'),
+          backgroundColor: AppColors.error,
+        ),
+      );
+      return;
+    }
+
+    // Require biometric authentication if available
+    if (_biometricAvailable) {
+      final authenticated = await _biometricService.authenticateForCheckout();
+      
+      if (!authenticated) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Authentification $_biometricType requise pour confirmer le paiement'),
+            backgroundColor: AppColors.error,
+          ),
+        );
+        return;
+      }
+    }
+
+    // Proceed to confirmation
+    if (mounted) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const CheckoutConfirmationScreen(),
+        ),
+      );
+    }
+  }
 
   final List<Map<String, dynamic>> _paymentMethods = [
     {
@@ -220,16 +279,7 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
               ],
             ),
             child: ElevatedButton(
-              onPressed: _selectedPaymentMethod != null
-                  ? () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CheckoutConfirmationScreen(),
-                        ),
-                      );
-                    }
-                  : null,
+              onPressed: _selectedPaymentMethod != null ? _confirmPayment : null,
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
                 foregroundColor: Colors.white,
@@ -239,12 +289,24 @@ class _CheckoutPaymentScreenState extends State<CheckoutPaymentScreen> {
                 ),
                 minimumSize: const Size(double.infinity, 56),
               ),
-              child: const Text(
-                'Continuer',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (_biometricAvailable) ...[
+                    Icon(
+                      _biometricType.contains('Face') ? Icons.face : Icons.fingerprint,
+                      size: 20,
+                    ),
+                    const SizedBox(width: 8),
+                  ],
+                  const Text(
+                    'Continuer',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
