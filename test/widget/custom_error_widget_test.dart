@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bolide/utils/error_handler.dart';
+import 'package:miles/utils/error_handler.dart';
 
 /// Widget tests for CustomErrorWidget
 /// Following Flutter 2025 testing best practices

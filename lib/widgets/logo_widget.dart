@@ -1,32 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LogoWidget extends StatelessWidget {
   final double size;
+  final bool iconOnly;
   
   const LogoWidget({
     super.key,
     this.size = 60,
+    this.iconOnly = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SvgPicture.asset(
+      iconOnly 
+        ? 'assets/icon_only_logo_miles.svg'
+        : 'assets/logo_miles.svg',
       height: size,
-      width: size,
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(size * 0.2),
-      ),
-      child: Center(
-        child: Text(
-          'B',
-          style: TextStyle(
-            fontSize: size * 0.6,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
+      width: iconOnly ? size : null,
+      fit: BoxFit.contain,
     );
   }
 }

@@ -31,12 +31,12 @@ class TermsConditionsScreen extends StatelessWidget {
           children: [
             _buildSection(
               '1. Acceptation des conditions',
-              'En accédant et en utilisant l\'application Bolide, vous acceptez d\'être lié par ces conditions générales d\'utilisation. '
+              'En accédant et en utilisant l\'application Miles, vous acceptez d\'être lié par ces conditions générales d\'utilisation. '
               'Si vous n\'acceptez pas ces conditions, veuillez ne pas utiliser l\'application.',
             ),
             _buildSection(
               '2. Utilisation du service',
-              'L\'application Bolide est destinée à faciliter l\'achat et la vente de pièces détachées automobiles. '
+              'L\'application Miles est destinée à faciliter l\'achat et la vente de pièces détachées automobiles. '
               'Vous vous engagez à utiliser ce service de manière légale et éthique.',
             ),
             _buildSection(
@@ -72,7 +72,7 @@ class TermsConditionsScreen extends StatelessWidget {
             ),
             _buildSection(
               '9. Propriété intellectuelle',
-              'Tous les contenus de l\'application (textes, images, logos) sont protégés par le droit d\'auteur et appartiennent à Bolide. '
+              'Tous les contenus de l\'application (textes, images, logos) sont protégés par le droit d\'auteur et appartiennent à Miles. '
               'Toute reproduction sans autorisation est interdite.',
             ),
             _buildSection(
@@ -94,7 +94,7 @@ class TermsConditionsScreen extends StatelessWidget {
             const SizedBox(height: 16),
             Center(
               child: Text(
-                'Pour toute question, contactez-nous à contact@bolide.sn',
+                'Pour toute question, contactez-nous à contact@miles.sn',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 13,

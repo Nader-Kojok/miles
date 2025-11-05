@@ -148,7 +148,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   child: Opacity(
                     opacity: _fadeAnimation.value,
                     child: const Text(
-                      'BOLIDE',
+                      'MILES',
                       style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,

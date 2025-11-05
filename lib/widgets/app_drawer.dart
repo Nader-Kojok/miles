@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../screens/profile_screen.dart';
 import '../screens/settings_screen.dart';
 import '../screens/about_us_screen.dart';
@@ -74,35 +75,13 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
 
-          // Bolide Logo
+          // Miles Logo
           Container(
             padding: const EdgeInsets.symmetric(vertical: 40),
-            child: Image.asset(
-              'assets/images/logo.png',
-              width: 80,
-              height: 80,
-              color: Colors.white,
-              errorBuilder: (context, error, stackTrace) {
-                // Fallback to text logo if image not found
-                return Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'B',
-                      style: TextStyle(
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF1A1A1A),
-                      ),
-                    ),
-                  ),
-                );
-              },
+            child: SvgPicture.asset(
+              'assets/icon_only_logo_miles.svg',
+              width: 100,
+              height: 100,
             ),
           ),
 

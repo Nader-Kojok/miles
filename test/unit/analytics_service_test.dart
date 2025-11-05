@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:bolide/services/analytics_service.dart';
+import 'package:miles/services/analytics_service.dart';
 
 /// Unit tests for Analytics Service
 /// Following Flutter 2025 testing best practices

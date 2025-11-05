@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class VoiceSearchService {
@@ -22,20 +22,20 @@ class VoiceSearchService {
     try {
       // Speech recognition is not supported on web
       if (kIsWeb) {
-        print('VoiceSearchService: Speech recognition not available on web');
+        debugPrint('VoiceSearchService: Speech recognition not available on web');
         _initialized = false;
         return false;
       }
 
       final available = await _speechToText.initialize(
-        onError: (error) => print('Speech recognition error: $error'),
-        onStatus: (status) => print('Speech recognition status: $status'),
+        onError: (error) => debugPrint('Speech recognition error: $error'),
+        onStatus: (status) => debugPrint('Speech recognition status: $status'),
       );
 
       _initialized = available;
       return available;
     } catch (e) {
-      print('Error initializing speech recognition: $e');
+      debugPrint('Error initializing speech recognition: $e');
       return false;
     }
   }
@@ -45,7 +45,7 @@ class VoiceSearchService {
     try {
       return await _speechToText.locales();
     } catch (e) {
-      print('Error getting available locales: $e');
+      debugPrint('Error getting available locales: $e');
       return [];
     }
   }
@@ -92,15 +92,16 @@ class VoiceSearchService {
           }
         },
         localeId: localeId ?? _currentLocale,
-        listenMode: stt.ListenMode.search,
+        listenOptions: stt.SpeechListenOptions(
+          listenMode: stt.ListenMode.search,
+          partialResults: onPartialResult != null,
+          cancelOnError: true,
+        ),
         pauseFor: pauseDuration,
-        partialResults: onPartialResult != null,
-        onSoundLevelChange: null,
-        cancelOnError: true,
         listenFor: const Duration(seconds: 30),
       );
     } catch (e) {
-      print('Error starting speech recognition: $e');
+      debugPrint('Error starting speech recognition: $e');
       rethrow;
     }
   }
@@ -110,7 +111,7 @@ class VoiceSearchService {
     try {
       await _speechToText.stop();
     } catch (e) {
-      print('Error stopping speech recognition: $e');
+      debugPrint('Error stopping speech recognition: $e');
     }
   }
 
@@ -119,7 +120,7 @@ class VoiceSearchService {
     try {
       await _speechToText.cancel();
     } catch (e) {
-      print('Error canceling speech recognition: $e');
+      debugPrint('Error canceling speech recognition: $e');
     }
   }
 

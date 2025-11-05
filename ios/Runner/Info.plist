@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Bolide</string>
+	<string>Miles</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>bolide</string>
+	<string>miles</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -35,7 +35,7 @@
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>Nous avons besoin d'accéder à la reconnaissance vocale pour la recherche vocale</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Bolide utilise Face ID pour une connexion rapide et sécurisée, ainsi que pour confirmer vos paiements</string>
+	<string>Miles utilise Face ID pour une connexion rapide et sécurisée, ainsi que pour confirmer vos paiements</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

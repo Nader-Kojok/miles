@@ -50,7 +50,7 @@ class AboutUsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             const Text(
-              'BOLIDE',
+              'MILES',
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
@@ -127,7 +127,7 @@ class AboutUsScreen extends StatelessWidget {
             
             _buildContactItem(
               icon: Icons.email,
-              text: 'contact@bolide.sn',
+              text: 'contact@miles.sn',
             ),
             _buildContactItem(
               icon: Icons.phone,
@@ -164,7 +164,7 @@ class AboutUsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '© 2025 Bolide. Tous droits réservés.',
+              '© 2025 Miles. Tous droits réservés.',
               style: TextStyle(
                 fontSize: 12,
                 color: Colors.grey[600],

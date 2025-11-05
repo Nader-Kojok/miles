@@ -242,7 +242,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: () {
                   // TODO: Open contact form or email
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Contact: support@bolide.com')),
+                    const SnackBar(content: Text('Contact: support@miles.sn')),
                   );
                 },
               ),
@@ -252,7 +252,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 onTap: () {
                   // TODO: Open issue reporting form
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Envoyez vos rapports à support@bolide.com')),
+                    const SnackBar(content: Text('Envoyez vos rapports à support@miles.sn')),
                   );
                 },
               ),
@@ -322,7 +322,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '© 2025 Bolide',
+                  '© 2025 Miles',
                   style: TextStyle(color: Colors.grey[600], fontSize: 12),
                 ),
               ],

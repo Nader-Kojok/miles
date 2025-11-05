@@ -57,7 +57,7 @@ export function Sidebar() {
               <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-900" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white">Bolide</h1>
+              <h1 className="text-xl font-bold text-white">Miles</h1>
               <p className="text-xs text-slate-400">Admin Dashboard</p>
             </div>
           </div>

@@ -122,7 +122,7 @@ class WelcomeScreen extends StatelessWidget {
                             Navigator.pushReplacementNamed(context, '/home');
                           },
                           child: const Text(
-                            'EXPLOREZ BOLIDE SANS INSCRIPTION',
+                            'EXPLOREZ MILES SANS INSCRIPTION',
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,

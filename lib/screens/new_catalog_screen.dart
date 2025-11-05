@@ -268,7 +268,7 @@ class _NewCatalogScreenState extends State<NewCatalogScreen> {
                           Row(
                             children: [
                               const Text(
-                                'Nouveau chez Bolide ',
+                                'Nouveau chez Miles ',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,

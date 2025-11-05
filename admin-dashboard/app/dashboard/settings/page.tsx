@@ -26,8 +26,8 @@ export default function SettingsPage() {
               <Label htmlFor="store_name">Nom de la boutique</Label>
               <Input
                 id="store_name"
-                placeholder="Bolide Pièces Auto"
-                defaultValue="Bolide"
+                placeholder="Miles Pièces Auto"
+                defaultValue="Miles"
               />
             </div>
             <div>

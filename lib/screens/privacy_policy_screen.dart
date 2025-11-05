@@ -30,7 +30,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Chez Bolide, nous prenons très au sérieux la confidentialité et la protection de vos données personnelles.',
+              'Chez Miles, nous prenons très au sérieux la confidentialité et la protection de vos données personnelles.',
               style: TextStyle(
                 fontSize: 15,
                 color: Colors.grey[700],
@@ -90,7 +90,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
               '• Supprimer vos données\n'
               '• Vous opposer au traitement de vos données\n'
               '• Exporter vos données\n\n'
-              'Pour exercer ces droits, contactez-nous à privacy@bolide.sn',
+              'Pour exercer ces droits, contactez-nous à privacy@miles.sn',
             ),
             _buildSection(
               '7. Conservation des données',
@@ -107,7 +107,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
             _buildSection(
               '9. Contact',
               'Pour toute question concernant cette politique de confidentialité ou vos données personnelles:\n\n'
-              'Email: privacy@bolide.sn\n'
+              'Email: privacy@miles.sn\n'
               'Téléphone: +221 33 123 4567\n'
               'Adresse: Dakar, Sénégal',
             ),

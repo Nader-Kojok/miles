@@ -1,5 +1,5 @@
-name: bolide
-description: "Bolide - Your automotive marketplace"
+name: miles
+description: "Miles - Your automotive marketplace"
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -67,9 +67,22 @@ dev_dependencies:
     sdk: flutter
   flutter_driver:
     sdk: flutter
+  
+  # App Icon Generator
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
   
   assets:
+    - assets/
     - assets/images/
+
+# App Icon Configuration
+flutter_launcher_icons:
+  ios: true
+  android: true
+  image_path: "assets/logo_app.png"
+  remove_alpha_ios: true
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/logo_app.png"

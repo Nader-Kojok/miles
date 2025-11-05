@@ -1,4 +1,4 @@
-# 🚗 Bolide - Application de vente de pièces détachées
+# 🚗 Miles - Application de vente de pièces détachées
 
 Application mobile Flutter pour la vente de pièces détachées automobile au Sénégal.
 
@@ -47,7 +47,7 @@ Application mobile Flutter pour la vente de pièces détachées automobile au S�
 
 1. **Cloner le projet**
 ```bash
-cd bolide
+cd miles
 ```
 
 2. **Installer les dépendances**

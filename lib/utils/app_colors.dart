@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Centralized color palette for the Bolide app
+/// Centralized color palette for the Miles app
 /// Based on a black primary theme with consistent accent colors
 class AppColors {
   // Primary colors
@@ -51,7 +51,7 @@ class AppColors {
   
   // Helper methods for opacity variations
   static Color withOpacity(Color color, double opacity) {
-    return color.withOpacity(opacity);
+    return color.withValues(alpha: opacity);
   }
   
   // Get color for order status

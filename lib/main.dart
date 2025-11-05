@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => VehicleProvider()),
       ],
       child: MaterialApp(
-        title: 'Bolide - Pièces détachées',
+        title: 'Miles - Pièces détachées',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(

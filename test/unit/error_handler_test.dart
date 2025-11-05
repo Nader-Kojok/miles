@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:bolide/utils/error_handler.dart';
+  import 'package:flutter_test/flutter_test.dart';
+import 'package:miles/utils/error_handler.dart';
 
 /// Unit tests for GlobalErrorHandler
 /// Following Flutter 2025 testing best practices

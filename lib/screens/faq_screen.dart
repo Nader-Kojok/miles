@@ -129,7 +129,7 @@ class _FAQScreenState extends State<FAQScreen> {
           question: 'Comment signaler une activité suspecte ?',
           answer: 'Si vous remarquez une activité suspecte sur votre compte, '
               'contactez immédiatement notre service client au +221 33 123 4567 '
-              'ou par email à security@bolide.sn',
+              'ou par email à security@miles.sn',
         ),
       ],
     ),

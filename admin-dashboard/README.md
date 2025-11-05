@@ -1,6 +1,6 @@
-# 🚗 Bolide Admin Dashboard
+# 🚗 Miles Admin Dashboard
 
-Tableau de bord d'administration web pour gérer l'application mobile Bolide (marketplace de pièces détachées automobiles).
+Tableau de bord d'administration web pour gérer l'application mobile Miles (marketplace de pièces détachées automobiles).
 
 ## 📋 Stack Technique
 
