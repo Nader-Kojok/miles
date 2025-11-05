@@ -15,6 +15,7 @@ import {
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Select,
   SelectContent,
@@ -28,8 +29,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { MoreHorizontal, Pencil, Trash2, Search, ChevronLeft, ChevronRight, Filter } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
+import { MoreHorizontal, Pencil, Plus, Search, Trash2, Filter } from 'lucide-react'
+import { Pagination } from '@/components/pagination'
 import Image from 'next/image'
 
 interface Product {
@@ -342,35 +343,13 @@ export function ProductsTable({ products }: { products: Product[] }) {
       </CardContent>
 
       {/* Pagination */}
-      {totalPages > 1 && (
-        <CardContent className="p-6 border-t">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-slate-600">
-              Page {currentPage} sur {totalPages}
-            </div>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
-              >
-                <ChevronLeft className="h-4 w-4" />
-                Précédent
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                disabled={currentPage === totalPages}
-              >
-                Suivant
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      )}
+      <CardContent className="p-6 border-t">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </CardContent>
     </Card>
   )
 }

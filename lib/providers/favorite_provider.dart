@@ -144,7 +144,7 @@ class FavoriteProvider extends ChangeNotifier {
     } catch (e) {
       // Rollback on error
       _favoriteIds.add(productId);
-      if (product != null && index >= 0) {
+      if (index >= 0) {
         _favorites.insert(index, product);
       }
       

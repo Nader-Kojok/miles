@@ -22,7 +22,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Pencil, Trash2, ChevronDown, ChevronRight, Search, ChevronLeft, Filter } from 'lucide-react'
+import { Pencil, Trash2, ChevronDown, ChevronRight, Search, Filter } from 'lucide-react'
+import { Pagination } from '@/components/pagination'
 import { CategoryIcon } from '@/components/category-icon'
 
 interface Category {
@@ -304,35 +305,13 @@ export function CategoriesTable({
       </CardContent>
 
       {/* Pagination */}
-      {totalPages > 1 && (
-        <CardContent className="p-6 border-t">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-slate-600">
-              Page {currentPage} sur {totalPages}
-            </div>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
-              >
-                <ChevronLeft className="h-4 w-4" />
-                Précédent
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                disabled={currentPage === totalPages}
-              >
-                Suivant
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      )}
+      <CardContent className="p-6 border-t">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </CardContent>
     </Card>
   )
 }

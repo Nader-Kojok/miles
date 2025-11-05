@@ -22,7 +22,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Search, ChevronLeft, ChevronRight, Filter, Eye } from 'lucide-react'
+import { Search, Filter, Eye } from 'lucide-react'
+import { Pagination } from '@/components/pagination'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import Link from 'next/link'
@@ -293,35 +294,13 @@ export function OrdersTable({ orders }: { orders: Order[] }) {
       </CardContent>
 
       {/* Pagination */}
-      {totalPages > 1 && (
-        <CardContent className="p-6 border-t">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-slate-600">
-              Page {currentPage} sur {totalPages}
-            </div>
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
-              >
-                <ChevronLeft className="h-4 w-4" />
-                Précédent
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                disabled={currentPage === totalPages}
-              >
-                Suivant
-                <ChevronRight className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-        </CardContent>
-      )}
+      <CardContent className="p-6 border-t">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </CardContent>
     </Card>
   )
 }
