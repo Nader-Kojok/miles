@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,7 +62,7 @@ class SearchService {
     try {
       // On web, we don't use SQLite - use SharedPreferences instead
       if (kIsWeb) {
-        print('SearchService: Running on web, using SharedPreferences');
+        debugPrint('SearchService: Running on web, using SharedPreferences');
         _initialized = true;
         return;
       }
@@ -93,9 +93,9 @@ class SearchService {
       );
 
       _initialized = true;
-      print('SearchService initialized successfully');
+      debugPrint('SearchService initialized successfully');
     } catch (e) {
-      print('Error initializing SearchService: $e');
+      debugPrint('Error initializing SearchService: $e');
       // Don't throw - allow app to continue without search history
       _initialized = true;
     }
@@ -120,7 +120,7 @@ class SearchService {
         return SearchHistoryItem.fromMap(map);
       }).toList();
     } catch (e) {
-      print('Error getting web search history: $e');
+      debugPrint('Error getting web search history: $e');
       return [];
     }
   }
@@ -132,7 +132,7 @@ class SearchService {
       final historyJson = history.map((item) => jsonEncode(item.toMap())).toList();
       await prefs.setStringList('search_history', historyJson);
     } catch (e) {
-      print('Error saving web search history: $e');
+      debugPrint('Error saving web search history: $e');
     }
   }
 
@@ -204,7 +204,7 @@ class SearchService {
       // Keep only last 100 searches
       await _cleanupOldHistory();
     } catch (e) {
-      print('Error saving search history: $e');
+      debugPrint('Error saving search history: $e');
     }
   }
 
@@ -226,7 +226,7 @@ class SearchService {
 
       return results.map((map) => SearchHistoryItem.fromMap(map)).toList();
     } catch (e) {
-      print('Error getting search history: $e');
+      debugPrint('Error getting search history: $e');
       return [];
     }
   }
@@ -283,7 +283,7 @@ class SearchService {
 
       return results.map((row) => row['query'] as String).toList();
     } catch (e) {
-      print('Error getting trending searches: $e');
+      debugPrint('Error getting trending searches: $e');
       return [];
     }
   }
@@ -293,7 +293,7 @@ class SearchService {
     try {
       if (kIsWeb) {
         // Web implementation - ID-based deletion not supported, skip
-        print('Web: ID-based deletion not supported');
+        debugPrint('Web: ID-based deletion not supported');
         return;
       }
 
@@ -304,7 +304,7 @@ class SearchService {
         whereArgs: [id],
       );
     } catch (e) {
-      print('Error deleting search history item: $e');
+      debugPrint('Error deleting search history item: $e');
     }
   }
 
@@ -328,7 +328,7 @@ class SearchService {
         whereArgs: [query.toLowerCase()],
       );
     } catch (e) {
-      print('Error deleting search by query: $e');
+      debugPrint('Error deleting search by query: $e');
     }
   }
 
@@ -339,15 +339,15 @@ class SearchService {
         // Web implementation
         final prefs = await SharedPreferences.getInstance();
         await prefs.remove('search_history');
-        print('Search history cleared (web)');
+        debugPrint('Search history cleared (web)');
         return;
       }
 
       final db = await database;
       await db.delete('search_history');
-      print('Search history cleared');
+      debugPrint('Search history cleared');
     } catch (e) {
-      print('Error clearing search history: $e');
+      debugPrint('Error clearing search history: $e');
     }
   }
 
@@ -378,7 +378,7 @@ class SearchService {
         ''');
       }
     } catch (e) {
-      print('Error cleaning up old history: $e');
+      debugPrint('Error cleaning up old history: $e');
     }
   }
 
@@ -411,7 +411,7 @@ class SearchService {
 
       return results.map((row) => row['query'] as String).toList();
     } catch (e) {
-      print('Error getting search suggestions: $e');
+      debugPrint('Error getting search suggestions: $e');
       return [];
     }
   }
@@ -430,7 +430,7 @@ class SearchService {
         _initialized = false;
       }
     } catch (e) {
-      print('Error closing database: $e');
+      debugPrint('Error closing database: $e');
       _initialized = false;
     }
   }

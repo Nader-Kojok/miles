@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +19,7 @@ class BiometricAuthService {
     try {
       return await _localAuth.canCheckBiometrics;
     } on PlatformException catch (e) {
-      print('Error checking biometrics: $e');
+      debugPrint('Error checking biometrics: $e');
       return false;
     }
   }
@@ -27,7 +29,7 @@ class BiometricAuthService {
     try {
       return await _localAuth.isDeviceSupported();
     } on PlatformException catch (e) {
-      print('Error checking device support: $e');
+      debugPrint('Error checking device support: $e');
       return false;
     }
   }
@@ -37,7 +39,7 @@ class BiometricAuthService {
     try {
       return await _localAuth.getAvailableBiometrics();
     } on PlatformException catch (e) {
-      print('Error getting available biometrics: $e');
+      debugPrint('Error getting available biometrics: $e');
       return <BiometricType>[];
     }
   }
@@ -80,7 +82,7 @@ class BiometricAuthService {
         ),
       );
     } on PlatformException catch (e) {
-      print('Error during authentication: $e');
+      debugPrint('Error during authentication: $e');
       return false;
     }
   }
@@ -156,7 +158,7 @@ class BiometricAuthService {
     try {
       await _localAuth.stopAuthentication();
     } on PlatformException catch (e) {
-      print('Error stopping authentication: $e');
+      debugPrint('Error stopping authentication: $e');
     }
   }
 }

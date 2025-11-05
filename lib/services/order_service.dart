@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/order.dart';
 import '../models/address.dart';
@@ -145,7 +147,7 @@ class OrderService {
 
       return Order.fromJson(orderJson);
     } catch (e) {
-      print('Erreur lors de la récupération de la commande: $e');
+      debugPrint('Erreur lors de la récupération de la commande: $e');
       return null;
     }
   }
@@ -170,7 +172,7 @@ class OrderService {
 
       return Order.fromJson(orderJson);
     } catch (e) {
-      print('Erreur lors de la récupération de la commande: $e');
+      debugPrint('Erreur lors de la récupération de la commande: $e');
       return null;
     }
   }
@@ -218,7 +220,7 @@ class OrderService {
 
       return counts;
     } catch (e) {
-      print('Erreur lors du comptage des commandes: $e');
+      debugPrint('Erreur lors du comptage des commandes: $e');
       return {};
     }
   }
@@ -242,7 +244,7 @@ class OrderService {
         (sum, order) => sum + (order['total'] as num).toDouble()
       );
     } catch (e) {
-      print('Erreur lors du calcul du total dépensé: $e');
+      debugPrint('Erreur lors du calcul du total dépensé: $e');
       return 0;
     }
   }

@@ -128,10 +128,12 @@ class FavoriteProvider extends ChangeNotifier {
   /// Remove from favorites
   Future<void> removeFromFavorites(String productId) async {
     // Find and store the product for potential rollback
-    final product = _favorites.firstWhere(
-      (p) => p.id == productId,
-      orElse: () => null as Product,
-    );
+    Product? product;
+    try {
+      product = _favorites.firstWhere((p) => p.id == productId);
+    } catch (e) {
+      product = null;
+    }
     final index = _favorites.indexWhere((p) => p.id == productId);
 
     // Optimistic update
@@ -144,7 +146,7 @@ class FavoriteProvider extends ChangeNotifier {
     } catch (e) {
       // Rollback on error
       _favoriteIds.add(productId);
-      if (index >= 0) {
+      if (index >= 0 && product != null) {
         _favorites.insert(index, product);
       }
       

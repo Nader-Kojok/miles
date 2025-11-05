@@ -61,27 +61,16 @@ class AppDrawer extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Header with Menu text
-          Container(
-            padding: const EdgeInsets.fromLTRB(16, 60, 16, 20),
-            alignment: Alignment.centerLeft,
-            child: const Text(
-              'Menu',
-              style: TextStyle(
-                color: Colors.white70,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
+          // Header spacing (Menu text removed)
+          const SizedBox(height: 60),
 
-          // Miles Logo
+          // Miles Logo with text
           Container(
             padding: const EdgeInsets.symmetric(vertical: 40),
             child: SvgPicture.asset(
-              'assets/icon_only_logo_miles.svg',
-              width: 100,
-              height: 100,
+              'assets/logo_miles_white _text.svg',
+              width: 80,
+              height: 80,
             ),
           ),
 

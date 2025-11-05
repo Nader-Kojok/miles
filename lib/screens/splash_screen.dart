@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'onboarding_screen.dart';
 import '../main.dart';
 
@@ -15,7 +16,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
   late Animation<double> _fadeAnimation;
-  late Animation<double> _slideAnimation;
 
   @override
   void initState() {
@@ -43,15 +43,6 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: const Interval(0.2, 0.6, curve: Curves.easeIn),
-    ));
-
-    // Slide animation for text
-    _slideAnimation = Tween<double>(
-      begin: 50.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: const Interval(0.4, 0.8, curve: Curves.easeOut),
     ));
 
     // Start animation
@@ -119,47 +110,15 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   scale: _scaleAnimation.value,
                   child: Opacity(
                     opacity: _fadeAnimation.value,
-                    child: Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'B',
-                          style: TextStyle(
-                            fontSize: 64,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
+                    child: SvgPicture.asset(
+                      'assets/logo_miles_white _text.svg',
+                      width: 150,
+                      height: 150,
                     ),
                   ),
                 ),
                 
                 const SizedBox(height: 24),
-                
-                // App name with slide and fade animation
-                Transform.translate(
-                  offset: Offset(0, _slideAnimation.value),
-                  child: Opacity(
-                    opacity: _fadeAnimation.value,
-                    child: const Text(
-                      'MILES',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 4,
-                      ),
-                    ),
-                  ),
-                ),
-                
-                const SizedBox(height: 8),
                 
                 // Tagline with delayed fade
                 Opacity(

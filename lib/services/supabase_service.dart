@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -23,15 +24,15 @@ class SupabaseService {
       // Remove any spaces or special characters except +
       final cleanPhone = formattedPhone.replaceAll(RegExp(r'[^\d+]'), '');
       
-      print('📱 Sending OTP to: $cleanPhone'); // Debug log
+      debugPrint('📱 Sending OTP to: $cleanPhone'); // Debug log
       
       await _client.auth.signInWithOtp(
         phone: cleanPhone,
       );
       
-      print('✅ OTP sent successfully'); // Debug log
+      debugPrint('✅ OTP sent successfully'); // Debug log
     } on AuthException catch (e) {
-      print('❌ Auth error: ${e.message} (${e.statusCode})'); // Debug log
+      debugPrint('❌ Auth error: ${e.message} (${e.statusCode})'); // Debug log
       // Handle specific Supabase auth errors
       if (e.statusCode == '422') {
         // Check for Twilio configuration errors
@@ -47,7 +48,7 @@ class SupabaseService {
       }
       throw Exception('Erreur d\'authentification: ${e.message}');
     } catch (e) {
-      print('❌ Error: $e'); // Debug log
+      debugPrint('❌ Error: $e'); // Debug log
       throw Exception('Erreur lors de l\'envoi du code: $e');
     }
   }

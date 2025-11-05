@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'faq_screen.dart';
 
 class AssistanceScreen extends StatelessWidget {
@@ -32,23 +33,10 @@ class AssistanceScreen extends StatelessWidget {
                     onPressed: () {},
                   ),
                   const Spacer(),
-                  Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'B',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                  SvgPicture.asset(
+                    'assets/icon_only_logo_miles.svg',
+                    width: 32,
+                    height: 32,
                   ),
                   const Spacer(),
                   IconButton(

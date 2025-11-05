@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../models/product.dart';
 import '../services/favorite_service.dart';
-import '../services/supabase_service.dart';
 import 'welcome_screen.dart';
 
 class FavoritesScreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   final TextEditingController _searchController = TextEditingController();
   final FavoriteService _favoriteService = FavoriteService();
-  final _supabaseService = SupabaseService();
+  // final _supabaseService = SupabaseService(); // Unused
   
   List<Product> _favorites = [];
   bool _isLoading = true;
@@ -171,23 +171,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     onPressed: () {},
                   ),
                   const Spacer(),
-                  Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'B',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                  SvgPicture.asset(
+                    'assets/icon_only_logo_miles.svg',
+                    width: 32,
+                    height: 32,
                   ),
                   const Spacer(),
                   IconButton(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'order_detail_screen.dart';
 import '../services/order_service.dart';
-import '../services/supabase_service.dart';
 import '../models/order.dart';
 import 'welcome_screen.dart';
 
@@ -16,7 +16,7 @@ class NewOrdersScreen extends StatefulWidget {
 class _NewOrdersScreenState extends State<NewOrdersScreen> {
   final TextEditingController _searchController = TextEditingController();
   final OrderService _orderService = OrderService();
-  final _supabaseService = SupabaseService();
+  // final _supabaseService = SupabaseService(); // Unused
   String _selectedFilter = 'Tout';
   
   List<Order> _orders = [];
@@ -216,23 +216,10 @@ class _NewOrdersScreenState extends State<NewOrdersScreen> {
                     onPressed: () {},
                   ),
                   const Spacer(),
-                  Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'B',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                  SvgPicture.asset(
+                    'assets/icon_only_logo_miles.svg',
+                    width: 32,
+                    height: 32,
                   ),
                   const Spacer(),
                   IconButton(

@@ -90,10 +90,11 @@ class ProfileProvider extends ChangeNotifier {
         maxAttempts: 2,
       );
 
-      _defaultAddress = _addresses.firstWhere(
-        (addr) => addr.isDefault,
-        orElse: () => _addresses.isNotEmpty ? _addresses.first : null as Address,
-      );
+      try {
+        _defaultAddress = _addresses.firstWhere((addr) => addr.isDefault);
+      } catch (e) {
+        _defaultAddress = _addresses.isNotEmpty ? _addresses.first : null;
+      }
 
       notifyListeners();
     } catch (e) {

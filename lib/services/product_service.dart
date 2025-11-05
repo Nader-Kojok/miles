@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/product.dart';
-import '../models/category.dart';
+import '../models/category.dart' as models;
 
 class ProductService {
   final SupabaseClient _client = Supabase.instance.client;
@@ -54,7 +56,7 @@ class ProductService {
 
       return Product.fromJson(response);
     } catch (e) {
-      print('Erreur lors de la récupération du produit: $e');
+      debugPrint('Erreur lors de la récupération du produit: $e');
       return null;
     }
   }
@@ -71,7 +73,7 @@ class ProductService {
 
       return Product.fromJson(response);
     } catch (e) {
-      print('Erreur lors de la récupération du produit: $e');
+      debugPrint('Erreur lors de la récupération du produit: $e');
       return null;
     }
   }
@@ -179,7 +181,7 @@ class ProductService {
       if (response == null) return null;
       return Product.fromJson(response);
     } catch (e) {
-      print('Erreur lors de la recherche par SKU: $e');
+      debugPrint('Erreur lors de la recherche par SKU: $e');
       return null;
     }
   }
@@ -253,7 +255,7 @@ class ProductService {
   }
 
   // Récupérer toutes les catégories actives
-  Future<List<Category>> getCategories() async {
+  Future<List<models.Category>> getCategories() async {
     try {
       final response = await _client
           .from('categories')
@@ -262,7 +264,7 @@ class ProductService {
           .order('display_order', ascending: true);
 
       return (response as List)
-          .map((json) => Category.fromJson(json as Map<String, dynamic>))
+          .map((json) => models.Category.fromJson(json as Map<String, dynamic>))
           .toList();
     } catch (e) {
       throw Exception('Erreur lors de la récupération des catégories: $e');
@@ -270,7 +272,7 @@ class ProductService {
   }
 
   // Récupérer une catégorie par ID
-  Future<Category?> getCategoryById(String id) async {
+  Future<models.Category?> getCategoryById(String id) async {
     try {
       final response = await _client
           .from('categories')
@@ -279,15 +281,15 @@ class ProductService {
           .eq('is_active', true)
           .single();
 
-      return Category.fromJson(response);
+      return models.Category.fromJson(response);
     } catch (e) {
-      print('Erreur lors de la récupération de la catégorie: $e');
+      debugPrint('Erreur lors de la récupération de la catégorie: $e');
       return null;
     }
   }
 
   // Récupérer une catégorie par slug
-  Future<Category?> getCategoryBySlug(String slug) async {
+  Future<models.Category?> getCategoryBySlug(String slug) async {
     try {
       final response = await _client
           .from('categories')
@@ -296,9 +298,9 @@ class ProductService {
           .eq('is_active', true)
           .single();
 
-      return Category.fromJson(response);
+      return models.Category.fromJson(response);
     } catch (e) {
-      print('Erreur lors de la récupération de la catégorie: $e');
+      debugPrint('Erreur lors de la récupération de la catégorie: $e');
       return null;
     }
   }
@@ -337,7 +339,7 @@ class ProductService {
 
       return (response as List).length;
     } catch (e) {
-      print('Erreur lors du comptage des produits: $e');
+      debugPrint('Erreur lors du comptage des produits: $e');
       return 0;
     }
   }

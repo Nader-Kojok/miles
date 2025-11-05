@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/vehicle.dart';
 
@@ -20,7 +22,7 @@ class VehicleService {
       makes.sort();
       return makes;
     } catch (e) {
-      print('Error fetching makes: $e');
+      debugPrint('Error fetching makes: $e');
       // Return sample data for demo
       return [
         'Audi',
@@ -55,7 +57,7 @@ class VehicleService {
       models.sort();
       return models;
     } catch (e) {
-      print('Error fetching models: $e');
+      debugPrint('Error fetching models: $e');
       // Return sample data for demo
       if (make == 'Hyundai') {
         return ['Santa Fe', 'Tucson', 'Elantra', 'Sonata', 'Kona'];
@@ -83,7 +85,7 @@ class VehicleService {
       motorizations.sort();
       return motorizations;
     } catch (e) {
-      print('Error fetching motorizations: $e');
+      debugPrint('Error fetching motorizations: $e');
       // Return sample data for demo
       return [
         'Essence - 3.3 4WD (199 KW / 270 CV)',
@@ -105,7 +107,7 @@ class VehicleService {
       if (response == null) return null;
       return Vehicle.fromJson(response);
     } catch (e) {
-      print('Error fetching vehicle by chassis: $e');
+      debugPrint('Error fetching vehicle by chassis: $e');
       return null;
     }
   }
@@ -150,7 +152,7 @@ class VehicleService {
       
       return Vehicle.fromJson(response);
     } catch (e) {
-      print('Error fetching vehicle: $e');
+      debugPrint('Error fetching vehicle: $e');
       // Return mock data for demo
       return Vehicle(
         id: 'demo-${DateTime.now().millisecondsSinceEpoch}',
@@ -179,7 +181,7 @@ class VehicleService {
         'created_at': DateTime.now().toIso8601String(),
       });
     } catch (e) {
-      print('Error saving to garage: $e');
+      debugPrint('Error saving to garage: $e');
       rethrow;
     }
   }
@@ -196,7 +198,7 @@ class VehicleService {
           .map((item) => Vehicle.fromJson(item['vehicles']))
           .toList();
     } catch (e) {
-      print('Error fetching user vehicles: $e');
+      debugPrint('Error fetching user vehicles: $e');
       return [];
     }
   }

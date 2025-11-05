@@ -66,7 +66,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
       await _loadSearchHistory();
       await _loadTrendingSearches();
     } catch (e) {
-      print('Error initializing services: $e');
+      debugPrint('Error initializing services: $e');
     }
   }
   

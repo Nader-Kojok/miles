@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:bolide/main.dart' as app;
+import 'package:miles/main.dart' as app;
 
 /// Integration tests for the Bolide app
 /// Following Flutter 2025 testing best practices

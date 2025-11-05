@@ -74,11 +74,10 @@ class PushNotificationService {
     if (data == null) return;
 
     // Navigate based on notification type
-    final type = data['type'] as String?;
-    final targetId = data['target_id'] as String?;
-
     // TODO: Implement navigation logic
     // Example:
+    // final type = data['type'] as String?;
+    // final targetId = data['target_id'] as String?;
     // if (type == 'order_update' && targetId != null) {
     //   navigatorKey.currentState?.pushNamed('/orders/$targetId');
     // } else if (type == 'product' && targetId != null) {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../services/profile_service.dart';
 import '../services/supabase_service.dart';
-import '../models/profile.dart';
 import '../utils/app_colors.dart';
 import 'welcome_screen.dart';
 
@@ -26,7 +25,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   DateTime? _birthday;
   bool _isLoading = true;
   bool _isSaving = false;
-  Profile? _profile;
+  // Profile? _profile; // Unused - profile data loaded directly into controllers
 
   @override
   void initState() {
@@ -53,7 +52,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       final profile = await _profileService.getUserProfile();
       if (profile != null && mounted) {
         setState(() {
-          _profile = profile;
+          // _profile = profile; // Unused
           _nameController.text = profile.fullName ?? '';
           _phoneController.text = profile.phone ?? '';
           _emailController.text = profile.email ?? '';

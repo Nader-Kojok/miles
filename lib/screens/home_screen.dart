@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'new_catalog_screen.dart';
 import 'new_orders_screen.dart';
 import 'assistance_screen.dart';
@@ -38,22 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         },
         backgroundColor: Colors.black,
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-            color: Colors.black,
-            shape: BoxShape.circle,
-          ),
-          child: const Center(
-            child: Text(
-              'B',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: SvgPicture.asset(
+            'assets/icon_only_logo_miles.svg',
           ),
         ),
       ),

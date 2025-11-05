@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/product.dart';
 
@@ -44,7 +46,7 @@ class FavoriteService {
           .map((fav) => fav['product_id'] as String)
           .toList();
     } catch (e) {
-      print('Erreur lors de la récupération des IDs favoris: $e');
+      debugPrint('Erreur lors de la récupération des IDs favoris: $e');
       return [];
     }
   }
@@ -101,7 +103,7 @@ class FavoriteService {
 
       return response != null;
     } catch (e) {
-      print('Erreur lors de la vérification du favori: $e');
+      debugPrint('Erreur lors de la vérification du favori: $e');
       return false;
     }
   }
@@ -133,7 +135,7 @@ class FavoriteService {
 
       return (response as List).length;
     } catch (e) {
-      print('Erreur lors du comptage des favoris: $e');
+      debugPrint('Erreur lors du comptage des favoris: $e');
       return 0;
     }
   }

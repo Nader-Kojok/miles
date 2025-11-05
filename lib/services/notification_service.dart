@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/notification.dart';
 
@@ -61,7 +63,7 @@ class NotificationService {
 
       return Notification.fromJson(response);
     } catch (e) {
-      print('Erreur lors de la récupération de la notification: $e');
+      debugPrint('Erreur lors de la récupération de la notification: $e');
       return null;
     }
   }
@@ -115,7 +117,7 @@ class NotificationService {
 
       return (response as List).length;
     } catch (e) {
-      print('Erreur lors du comptage des notifications non lues: $e');
+      debugPrint('Erreur lors du comptage des notifications non lues: $e');
       return 0;
     }
   }

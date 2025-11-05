@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../models/vehicle.dart';
 import '../screens/search_results_screen.dart';
 
@@ -254,20 +255,11 @@ class VehicleResultSheet extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Text(
-                              'B',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
+                          SvgPicture.asset(
+                            'assets/icon_only_logo_miles.svg',
+                            width: 24,
+                            height: 24,
+                            colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
                           ),
                           const SizedBox(width: 12),
                           const Text(

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../models/product.dart';
-import '../models/category.dart';
+import '../models/category.dart' as models;
 import 'product_detail_screen.dart';
 import 'cart_screen.dart';
 import 'search_results_screen.dart';
@@ -27,7 +28,7 @@ class _NewCatalogScreenState extends State<NewCatalogScreen> {
   final ProductService _productService = ProductService();
   int _carouselIndex = 0;
   
-  List<Category> _categories = [];
+  List<models.Category> _categories = [];
   List<Product> _products = [];
   List<String> _brands = [];
   bool _isLoading = true;
@@ -140,23 +141,10 @@ class _NewCatalogScreenState extends State<NewCatalogScreen> {
                     },
                   ),
                 // Logo
-                Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'B',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
+                SvgPicture.asset(
+                  'assets/icon_only_logo_miles.svg',
+                  width: 32,
+                  height: 32,
                 ),
                 Consumer<CartService>(
                   builder: (context, cart, child) {

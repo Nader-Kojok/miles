@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/profile.dart';
 import '../models/address.dart';
@@ -23,7 +23,7 @@ class ProfileService {
 
       return Profile.fromJson(response);
     } catch (e) {
-      print('Erreur lors de la récupération du profil: $e');
+      debugPrint('Erreur lors de la récupération du profil: $e');
       return null;
     }
   }
@@ -101,7 +101,7 @@ class ProfileService {
       if (response == null) return null;
       return Address.fromJson(response);
     } catch (e) {
-      print('Erreur lors de la récupération de l\'adresse par défaut: $e');
+      debugPrint('Erreur lors de la récupération de l\'adresse par défaut: $e');
       return null;
     }
   }
